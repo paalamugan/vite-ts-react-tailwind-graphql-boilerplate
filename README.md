@@ -34,6 +34,7 @@
 ## Running the app in docker-compose in production mode
 
 - Run `export ENV=prod && docker compose up` to run the docker image.
+- Run with tag `export ENV=prod TAG=1.0 && docker compose up` to run the docker image.
 - Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 ## Generate the code coverage report

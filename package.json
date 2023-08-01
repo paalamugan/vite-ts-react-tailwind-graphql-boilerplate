@@ -9,6 +9,7 @@
     "dev": "vite",
     "build": "yarn type-check && vite build",
     "preview": "vite preview",
+    "serve": "yarn build && vite preview",
     "lint": "eslint ./src --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0 --cache",
     "lint:fix": "yarn lint --fix",
     "type-check": "tsc --noEmit",

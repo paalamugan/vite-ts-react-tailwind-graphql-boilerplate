@@ -30,8 +30,5 @@ ENV NODE_ENV production
 # Expose the port the app runs in (8080)
 EXPOSE 8080
 
-# Building app
-RUN yarn build 
-
-# Running the app in production mode
-CMD ["yarn", "build", "yarn", "preview"]
+# Build and Running the app in production mode
+CMD  ["yarn", "serve"]

@@ -2,7 +2,7 @@ version: '3.8'
 services:
   vite-ts-react-app:
     container_name: vite-ts-react-app-${ENV:-dev}
-    image: vite-ts-react-app-${ENV:-dev}:1.1
+    image: vite-ts-react-app-${ENV:-dev}:${TAG:-latest}
     hostname: vite-ts-react-app-${ENV:-dev}
     build:
       context: ./
