@@ -1,0 +1,16 @@
+export enum PERMISSION_ENUM {
+  ALL = 'ALL',
+  CREATE = 'CREATE',
+  READ = 'READ',
+  UPDATE = 'UPDATE',
+  DELETE = 'DELETE',
+  VISIBLE = 'VISIBLE',
+}
+
+export enum ROLE_ENUM {
+  OWNER = 'OWNER',
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  GUEST = 'GUEST',
+  CONTRIBUTOR = 'CONTRIBUTOR',
+}

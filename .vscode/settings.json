@@ -1,0 +1,20 @@
+/**
+  Settings for this workspace/project. These settings override VS Code's global settings.
+  Settings defined here are specific to this workspace/project.
+  To learn more about configuring VS Code, see https://code.visualstudio.com/docs/getstarted/settings.
+**/
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": true,
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "npm.packageManager": "yarn",
+  "cSpell.words": ["codegen", "Msal", "zustand"],
+  "vitest.commandLine": "yarn test:watch",
+  "prettier.prettierPath": "node_modules/prettier"
+}

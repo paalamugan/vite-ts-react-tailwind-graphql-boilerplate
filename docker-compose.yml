@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  vite-ts-react-app:
+    container_name: vite-ts-react-app-${ENV:-dev}
+    image: vite-ts-react-app-${ENV:-dev}:1.1
+    hostname: vite-ts-react-app-${ENV:-dev}
+    build:
+      context: ./
+      target: ${ENV:-dev}
+    ports:
+      - 3000:3000
+      - 8080:8080
+    volumes:
+      - ./:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:

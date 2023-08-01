@@ -1,0 +1,11 @@
+#!/bin/sh
+
+  concurrently \
+  --kill-others-on-fail \
+  --prefix "[{name}]" \
+  --names "TYPE-CHECK,LINT,TEST,BUILD" \
+  --prefix-colors "bgRed.bold.white,bgGreen.bold.white,bgBlue.bold.white,bgMagenta.bold.white" \
+    "yarn type-check" \
+    "yarn lint" \
+    "yarn test" \
+    "yarn build"

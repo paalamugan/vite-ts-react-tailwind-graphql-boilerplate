@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "ZixuanChen.vitest-explorer",
+    "streetsidesoftware.code-spell-checker",
+    "capaj.graphql-codegen-vscode",
+    "GraphQL.vscode-graphql-syntax",
+    "GraphQL.vscode-graphql"
+  ]
+}

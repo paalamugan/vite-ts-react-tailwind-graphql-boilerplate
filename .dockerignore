@@ -1,0 +1,10 @@
+.git
+node_modules
+yarn.lock
+build
+dist
+html
+coverage
+schema.graphql
+*.log
+.eslintcache
