@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import type { TypedDocumentString } from '@/gql/graphql';
 import { useAppConfig } from '@/providers/AppConfigProvider';
 import { graphQLFetcher } from '@/shared/helpers/graphql-query.helper';
@@ -14,7 +16,7 @@ import { useQueryFetcher } from './useQueryFetcher';
  * with a fetcher and an options object.
  * Example:
  * ```
- * const { data, error, loading } = useGraphQLQuery(orderLookup, {
+ * const { data, error, loading } = useGraphQLQuery(graphqlQuery, {
  *  orderNumber: '123',
  * });
  * ```
@@ -23,12 +25,33 @@ export const useGraphQLQuery = <TResult, TVariables>(
   document: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables & { skip?: boolean }]
 ) => {
-  const config = useAppConfig();
+  const { projectInfo, serviceConfig } = useAppConfig();
   const { skip, ...restVariables } = variables ?? {};
-  const fetcher = graphQLFetcher<Omit<TResult, '__typename'>, typeof restVariables>(config.apiUrl, config.apiKey);
-  return useQueryFetcher(fetcher, {
-    query: document.length ? document.toString() : '',
+  const fetcher = graphQLFetcher<Omit<TResult, '__typename'>, typeof restVariables>(
+    serviceConfig.apiUrl,
+    projectInfo.apiKey,
+  );
+  let queryDocument = '';
+  if (document.length) {
+    queryDocument = document.toString();
+  }
+
+  const result = useQueryFetcher(fetcher, {
+    query: queryDocument,
     skip: skip,
     variables: restVariables,
   });
+
+  const refetch = useCallback(
+    (variables: TVariables) => {
+      const { ...restVariables } = variables ?? {};
+      return result.refetch({ query: queryDocument, variables: restVariables });
+    },
+    [queryDocument, result],
+  );
+
+  return {
+    ...result,
+    refetch,
+  };
 };
