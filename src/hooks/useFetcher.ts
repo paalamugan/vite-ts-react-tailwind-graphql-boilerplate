@@ -39,6 +39,7 @@ export const useFetcher = <
   const parameterRef = useRef<Parameters<TFetcher>[0]>();
   const [initialized, setInitialized] = useState<boolean>(false);
   const mountedRef = useRef(false);
+  const [isParamChanged, setIsParamChanged] = useState<boolean>(false);
 
   // Set up a ref to the fetcher for future use.
   useEffect(() => {
@@ -48,6 +49,13 @@ export const useFetcher = <
       mountedRef.current = false;
     };
   }, [fetcher]);
+
+  useEffect(() => {
+    const paramEquality = isEqual(parameter, parameterRef.current);
+    if (paramEquality) return;
+    setIsParamChanged(true);
+    parameterRef.current = parameter;
+  }, [parameter]);
 
   // Set up a fetcher function that will be used to fetch data.
   const fetchData = useCallback(
@@ -70,7 +78,7 @@ export const useFetcher = <
         if (mountedRef.current) {
           setLoading(false);
           setInitialized(true);
-          parameterRef.current = param;
+          setIsParamChanged(false);
         }
       }
     },
@@ -79,21 +87,15 @@ export const useFetcher = <
 
   // Fetch data immediately when the hook is first mounted.
   useEffect(() => {
-    const { skip, ...restParam } = parameter ?? {};
-
-    const paramEquality = isEqual(restParam, parameterRef.current);
-    const skipValue = skip ?? internalSkip ?? false;
-    if (skipValue || paramEquality) return;
-
-    fetchData(restParam).catch(console.error);
-    parameterRef.current = restParam;
-  }, [fetchData, parameter, internalSkip]);
+    if (!isParamChanged || internalSkip) return;
+    fetchData(parameterRef.current).catch(console.error);
+  }, [fetchData, isParamChanged, internalSkip]);
 
   const refetch = useCallback(
     async <TParamFetch extends Parameters<TFetcher>[0]>(
       ...[param]: TParamFetch extends undefined ? [] : [Parameters<TFetcher>[0]]
     ) => {
-      await fetchData(param);
+      return await fetchData(param);
     },
     [fetchData],
   );
