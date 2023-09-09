@@ -29,6 +29,9 @@ module.exports = {
         project: ['./tsconfig.json', './tsconfig.node.json'],
         tsconfigRootDir: __dirname,
       },
+      rules: {
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      },
     },
   ],
   plugins: ['import', 'sort-keys-fix', '@typescript-eslint', 'prettier', 'react-refresh'],

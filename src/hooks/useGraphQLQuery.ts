@@ -25,12 +25,9 @@ export const useGraphQLQuery = <TResult, TVariables>(
   document: TypedDocumentString<TResult, TVariables>,
   ...[variables]: TVariables extends Record<string, never> ? [] : [TVariables & { skip?: boolean }]
 ) => {
-  const { projectInfo, serviceConfig } = useAppConfig();
+  const appConfig = useAppConfig();
   const { skip, ...restVariables } = variables ?? {};
-  const fetcher = graphQLFetcher<Omit<TResult, '__typename'>, typeof restVariables>(
-    serviceConfig.apiUrl,
-    projectInfo.apiKey,
-  );
+  const fetcher = graphQLFetcher<Omit<TResult, '__typename'>, typeof restVariables>(appConfig.apiUrl, appConfig.apiKey);
   let queryDocument = '';
   if (document.length) {
     queryDocument = document.toString();

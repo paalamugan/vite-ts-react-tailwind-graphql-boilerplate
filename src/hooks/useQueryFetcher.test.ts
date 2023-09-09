@@ -50,7 +50,7 @@ describe('useQueryFetcher', () => {
   it('passes parameter to fetcher', async () => {
     const { result } = renderHook(() => useQueryFetcher(fetcher, { id: 1, skip: false }));
 
-    expect(fetcher).toHaveBeenCalledWith({ id: 1 });
+    expect(fetcher).toHaveBeenCalledWith({ id: 1, skip: false });
 
     fetcher.mockResolvedValueOnce('data2');
     await result.current.refetch({ id: 2 });
