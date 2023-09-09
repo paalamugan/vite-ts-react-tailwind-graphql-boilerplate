@@ -80,9 +80,9 @@ const DataContent = ({ listItems }: { listItems: any[] }) => (
   </div>
 );
 
-const CategoryListComponent = () => {
-  const { loading, data, error } = useQueryFetcher(getCategoryList, {
-    category: ListCategory.SpecialDiscountReason,
+const ExampleComponent = () => {
+  const { loading, data, error } = useGraphQLQuery(graphqlQuery, {
+    id: '1',
   });
 
   return (
@@ -114,9 +114,9 @@ const DataContent = ({ isLoading, listItems }: { isLoading: boolean; listItems: 
   </div>
 );
 
-const CategoryListComponent = () => {
-  const { loading, data, error } = useQueryFetcher(getCategoryList, {
-    category: ListCategory.SpecialDiscountReason,
+const ExampleComponent = () => {
+  const { loading, data, error } = useGraphQLQuery(graphqlQuery, {
+    id: '1',
   });
   return (
     <QueryFetchTemplate loading={loading} error={error} data={data} noDataContent={<NoDataContent />}>
