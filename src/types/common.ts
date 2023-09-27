@@ -7,4 +7,5 @@ export interface UserInfo {
   mobilePhone: string;
   surname: string;
   roles: string[];
+  avatar?: string;
 }
